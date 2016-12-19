@@ -1,0 +1,93 @@
+<?php
+
+/**
+ * Created by PhpStorm.
+ * User: Santosh
+ * Date: 8/23/2016
+ * Time: 8:22 PM
+ */
+
+
+
+/**
+ * This class is used for CRUDE operation of Database
+ */
+class Database
+{
+    private $_connect=NULL;
+    //private $_instance=NULL;
+     private static $_instance=NULL;
+
+    public function __construct()
+    {
+//        if (!isset($this->_instance)) {
+//            echo "*************{$this->_instance}************";
+            $this->connectDB();
+//        }
+//        else{
+//            return $this;
+//        }
+    }
+
+
+    private function connectDB(){
+        try{
+            $this->_connect=new PDO('mysql:host=127.0.0.1; dbname=project','root','');
+            //echo $this->_instance="check<br>";
+            echo "check";
+        }
+        catch (PDOException $pex){
+            die($pex->getMessage());
+        }
+    }
+    /** Instantiation without Static Method
+      This logic could not be implemented
+         without static method because
+            the values that are set from one object is independent to another object
+     */
+//    public function instantiate(){
+//        if(!isset($this->_instance)){
+//            return new Database();
+//        }
+//        return $this;;
+//    }
+    /** Instance function
+     *This function saves the "Database connection time"  if it's already connected "
+     * */
+    public static function instantiate(){
+        if(!isset(self::$_instance)){
+            self::$_instance=new Database();
+        }
+
+        return self::$_instance;
+
+    }
+
+    public function insert(){
+
+
+    }
+
+    public function select(){
+
+    }
+
+    public function update(){
+
+    }
+
+    public function delete(){
+
+    }
+
+}
+echo "<pre>";
+var_dump(Database::instantiate());
+echo "<hr>";
+var_dump(Database::instantiate());
+echo "<hr>";
+var_dump(Database::instantiate());
+echo "<hr>";
+
+//$db2=new Database();
+//var_dump($db2->instantiate());
